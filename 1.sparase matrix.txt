@@ -1,0 +1,35 @@
+Sparse Matrix and its representations
+• A matrix is a two-dimensional data object made of m rows and n 
+columns, therefore having total m x n values. If most of the 
+elements of the matrix have 0 value, then it is called a sparse 
+matrix
+
+
+
+
+#include <stdio.h>
+
+typedef struct { int r, c, v; } Sparse;
+
+void convert(int mat[][100], int n) {
+    Sparse arr[100];
+    int k = 0;
+    
+    for(int i = 0; i < n; i++)
+        for(int j = 0; j < n; j++)
+            if(mat[i][j] != 0) {
+                arr[k].r = i;
+                arr[k].c = j;
+                arr[k++].v = mat[i][j];
+            }
+    
+    printf("Row\tCol\tVal\n");
+    for(int i = 0; i < k; i++)
+        printf("%d\t%d\t%d\n", arr[i].r, arr[i].c, arr[i].v);
+}
+
+int main() {
+    int mat[3][100] = {{0,0,3},{0,5,0},{0,0,0}};
+    convert(mat, 3);
+    return 0;
+}
